@@ -31,7 +31,14 @@ def test_delete_book(self):
     with self.assertRaises(ValueError):
         self.book_manager.get_book("12345")
 
-#
+# This method checks if the search functionality works correctly
+def test_search_books(self):
+    self.book_manager.add_book("12345", "Python 101", "abc", 2023)
+    self.book_manager.add_book("67890", "Learning JavaScript", "xyz", 2021)
+    results = self.book_manager.search_books("Python")
+    self.assertEqual(len(results), 1)
+    self.assertEqual(results[0].title, "Python 101")
 
 if __name__ == '__main__':
     unittest.main()
+
