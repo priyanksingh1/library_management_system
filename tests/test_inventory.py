@@ -29,6 +29,9 @@ class TestInventoryManager(unittest.TestCase):
         self.inventory_manager.update_inventory(self.book.isbn, action="return")
         self.assertEqual(self.book.copies, 3)
 
+    def test_low_stock_alert(self):
+        self.book.copies = 1  # Set low stock level
+        self.assertTrue(self.inventory_manager.low_stock_alert(self.book.isbn))
 
 if __name__ == '__main__':
     unittest.main()
