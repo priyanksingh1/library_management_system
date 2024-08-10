@@ -23,3 +23,12 @@ class TestOverdueManager(unittest.TestCase):
         self.assertEqual(len(overdue_books), 1)
         self.assertEqual(overdue_books[0].user.email, self.user.email)
 
+    def test_calculate_fine(self):
+        # Simulate overdue by setting borrowed date in the past
+        self.borrowed_book.borrowed_date = date.today() - timedelta(days=15)
+        fine = self.overdue_manager.calculate_fine(self.user.email, self.book.isbn)
+        self.assertEqual(fine, self.overdue_manager.fine_per_day * 1)  # 1 day overdue
+
+
+if __name__ == '__main__':
+    unittest.main()
