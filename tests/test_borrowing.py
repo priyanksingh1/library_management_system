@@ -26,6 +26,11 @@ class TestBorrowingManager(unittest.TestCase):
         self.borrowing_manager.return_book(self.user.email, self.book.isbn)
         self.assertTrue(self.book.available)
 
+    def test_renew_book(self):
+        borrowed_book = self.borrowing_manager.borrow_book(self.user.email, self.book.isbn)
+        renewed_book = self.borrowing_manager.renew_book(self.user.email, self.book.isbn)
+        self.assertEqual(renewed_book.due_date, borrowed_book.due_date + self.borrowing_manager.renewal_period)
+
 
 if __name__ == '__main__':
     unittest.main()
