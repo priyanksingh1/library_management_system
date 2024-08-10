@@ -7,3 +7,10 @@ class User:
 
     def check_password(self, password):
         return self.password == password
+
+class Book:
+    def __init__(self, isbn, title, author, published_year):
+        self.isbn = isbn
+        self.title = title
+        self.author = author
+        self.published_year = published_year
