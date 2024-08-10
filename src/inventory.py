@@ -24,3 +24,9 @@ class InventoryManager:
     def low_stock_alert(self, isbn):
         book = self._find_book(isbn)
         return book.copies <= self.low_stock_threshold
+
+    def find_book(self, isbn):
+        for book in self.book_manager.books.values():
+            if book.isbn == isbn:
+                return book
+        raise ValueError("Book not found.")
