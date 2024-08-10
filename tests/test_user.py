@@ -32,4 +32,10 @@ class TestUserManager(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.user_manager.authenticate_user("abc@example.com", "wrongpassword")
 
+# Verifies that users can be assigned roles other than the default "user".
+    def test_role_based_access(self):
+        user = self.user_manager.register_user("Admin User", "admin@example.com", "adminpass", role="admin")
+        self.assertEqual(user.role, "admin")
 
+if __name__ == '__main__':
+    unittest.main()
