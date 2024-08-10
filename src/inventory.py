@@ -12,3 +12,11 @@ class InventoryManager:
             }
         return inventory
 
+    def update_inventory(self, isbn, action="borrow"):
+        book = self._find_book(isbn)
+        if action == "borrow":
+            book.decrease_copies()
+        elif action == "return":
+            book.increase_copies()
+        else:
+            raise ValueError("Invalid action specified. Use 'borrow' or 'return'.")
