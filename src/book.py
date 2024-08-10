@@ -10,3 +10,14 @@ class BookManager:
         book = Book(isbn, title, author, published_year)
         self.books[isbn] = book
         return book
+
+    def edit_book(self, isbn, title=None, author=None, published_year=None):
+        book = self.get_book(isbn)
+        if title:
+            book.title = title
+        if author:
+            book.author = author
+        if published_year:
+            book.published_year = published_year
+        return book
+
