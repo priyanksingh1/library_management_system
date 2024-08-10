@@ -18,3 +18,8 @@ class BorrowingManager:
         book.available = False
         return borrowed_book
 
+    def return_book(self, user_email, book_isbn):
+        borrowed_book = self._find_borrowed_book(user_email, book_isbn)
+        self.borrowed_books.remove(borrowed_book)
+        borrowed_book.book.available = True
+
