@@ -19,3 +19,11 @@ class TestUserManager(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.user_manager.register_user("abc", "abc@example.com", "password456")
 
+# Tests if a user can log in with correct credentials.
+    def test_user_authentication(self):
+        self.user_manager.register_user("abc", "abc@example.com", "password123")
+        user = self.user_manager.authenticate_user("abc@example.com", "password123")
+        self.assertIsNotNone(user)
+        self.assertEqual(user.name, "abc")
+
+#
