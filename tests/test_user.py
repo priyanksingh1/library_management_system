@@ -12,3 +12,10 @@ class TestUserManager(unittest.TestCase):
         self.assertIsInstance(user, User)
         self.assertEqual(user.name, "abc")
         self.assertEqual(user.email, "abc@example.com")
+
+# Ensures that attempting to register a user with an existing email raises a 'ValueError'.
+    def test_duplicate_email(self):
+        self.user_manager.register_user("abc", "abc@example.com", "password123")
+        with self.assertRaises(ValueError):
+            self.user_manager.register_user("abc", "abc@example.com", "password456")
+
