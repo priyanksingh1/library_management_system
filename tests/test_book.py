@@ -24,7 +24,14 @@ def test_edit_book(self):
     updated_book = self.book_manager.edit_book("12345", title="Advanced Python")
     self.assertEqual(updated_book.title, "Advanced Python")
 
+# After deletion this method attempts to retrieve the book and expects a 'ValueError'
+def test_delete_book(self):
+    self.book_manager.add_book("12345", "Python 101", "abc", 2023)
+    self.book_manager.delete_book("12345")
+    with self.assertRaises(ValueError):
+        self.book_manager.get_book("12345")
 
+#
 
 if __name__ == '__main__':
     unittest.main()
