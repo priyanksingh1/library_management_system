@@ -20,3 +20,7 @@ class InventoryManager:
             book.increase_copies()
         else:
             raise ValueError("Invalid action specified. Use 'borrow' or 'return'.")
+
+    def low_stock_alert(self, isbn):
+        book = self._find_book(isbn)
+        return book.copies <= self.low_stock_threshold
