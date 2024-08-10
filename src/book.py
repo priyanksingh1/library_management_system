@@ -21,3 +21,8 @@ class BookManager:
             book.published_year = published_year
         return book
 
+    def delete_book(self, isbn):
+        if isbn not in self.books:
+            raise ValueError("Book not found.")
+        del self.books[isbn]
+
