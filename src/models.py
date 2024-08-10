@@ -14,3 +14,15 @@ class Book:
         self.title = title
         self.author = author
         self.published_year = published_year
+
+from datetime import date, timedelta
+
+class BorrowedBook:
+    def __init__(self, user, book, borrowed_date=None, due_date=None):
+        self.user = user
+        self.book = book
+        self.borrowed_date = borrowed_date or date.today()
+        self.due_date = due_date or (self.borrowed_date + timedelta(days=14))  # Default 2-week borrowing period
+
+    def extend_due_date(self, days):
+        self.due_date += timedelta(days=days)
