@@ -28,3 +28,13 @@ class BorrowingManager:
         borrowed_book.extend_due_date(self.renewal_period.days)
         return borrowed_book
 
+    def reserve_book(self, user_email, book_isbn):
+        # Allow reservation only if the book is currently borrowed
+        book = self._find_book(book_isbn)
+        if book.available:
+            raise ValueError("Book is currently available and cannot be reserved.")
+
+        user = self._find_user(user_email)
+        reserved_book = BorrowedBook(user, book, borrowed_date=None, due_date=None)
+        self.borrowed_books.append(reserved_book)
+        return reserved_book
