@@ -23,3 +23,8 @@ class BorrowingManager:
         self.borrowed_books.remove(borrowed_book)
         borrowed_book.book.available = True
 
+    def renew_book(self, user_email, book_isbn):
+        borrowed_book = self._find_borrowed_book(user_email, book_isbn)
+        borrowed_book.extend_due_date(self.renewal_period.days)
+        return borrowed_book
+
