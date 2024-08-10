@@ -18,3 +18,9 @@ class TestInventoryManager(unittest.TestCase):
         self.assertEqual(inventory[self.book.isbn]['title'], "Python 101")
         self.assertEqual(inventory[self.book.isbn]['copies'], 3)
 
+    def test_update_on_borrow(self):
+        self.borrowing_manager.borrow_book("john@example.com", self.book.isbn)
+        self.inventory_manager.update_inventory(self.book.isbn, action="borrow")
+        self.assertEqual(self.book.copies, 2)
+
+
