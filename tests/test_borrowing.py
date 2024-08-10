@@ -21,6 +21,11 @@ class TestBorrowingManager(unittest.TestCase):
         self.assertEqual(borrowed_book.user.email, self.user.email)
         self.assertFalse(self.book.available)
 
+    def test_return_book(self):
+        borrowed_book = self.borrowing_manager.borrow_book(self.user.email, self.book.isbn)
+        self.borrowing_manager.return_book(self.user.email, self.book.isbn)
+        self.assertTrue(self.book.available)
+
 
 if __name__ == '__main__':
     unittest.main()
