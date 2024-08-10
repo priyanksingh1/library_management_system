@@ -38,3 +38,15 @@ class BorrowingManager:
         reserved_book = BorrowedBook(user, book, borrowed_date=None, due_date=None)
         self.borrowed_books.append(reserved_book)
         return reserved_book
+
+    def _find_book(self, isbn):
+        for book in self.book_manager.books.values():
+            if book.isbn == isbn:
+                return book
+        raise ValueError("Book not found.")
+
+    def _find_user(self, email):
+        for user in self.user_manager.users.values():
+            if user.email == email:
+                return user
+        raise ValueError("User not found.")
