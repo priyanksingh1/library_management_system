@@ -31,3 +31,9 @@ class BookManager:
             raise ValueError("Book not found.")
         return self.books[isbn]
 
+    def search_books(self, query):
+        results = []
+        for book in self.books.values():
+            if query.lower() in book.title.lower() or query.lower() in book.author.lower():
+                results.append(book)
+        return results
