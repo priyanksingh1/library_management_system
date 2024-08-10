@@ -31,6 +31,12 @@ class TestBorrowingManager(unittest.TestCase):
         renewed_book = self.borrowing_manager.renew_book(self.user.email, self.book.isbn)
         self.assertEqual(renewed_book.due_date, borrowed_book.due_date + self.borrowing_manager.renewal_period)
 
-
+    def test_reserve_book(self):
+        # Another user tries to borrow the same book
+        another_user = self.user_manager.register_user("Jane Doe", "jane@example.com", "password456")
+        self.borrowing_manager.borrow_book(self.user.email, self.book.isbn)
+        reserved_book = self.borrowing_manager.reserve_book(another_user.email, self.book.isbn)
+        self.assertIsInstance(reserved_book, BorrowedBook)
+        self.assertEqual(reserved_book.user.email, another_user.email)
 if __name__ == '__main__':
     unittest.main()
