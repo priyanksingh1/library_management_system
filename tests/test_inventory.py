@@ -23,4 +23,12 @@ class TestInventoryManager(unittest.TestCase):
         self.inventory_manager.update_inventory(self.book.isbn, action="borrow")
         self.assertEqual(self.book.copies, 2)
 
+    def test_update_on_return(self):
+        self.borrowing_manager.borrow_book("john@example.com", self.book.isbn)
+        self.inventory_manager.update_inventory(self.book.isbn, action="borrow")
+        self.inventory_manager.update_inventory(self.book.isbn, action="return")
+        self.assertEqual(self.book.copies, 3)
 
+
+if __name__ == '__main__':
+    unittest.main()
