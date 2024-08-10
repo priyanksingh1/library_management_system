@@ -26,4 +26,10 @@ class TestUserManager(unittest.TestCase):
         self.assertIsNotNone(user)
         self.assertEqual(user.name, "abc")
 
-#
+#  Ensures that invalid credentials raise a 'ValueError'.
+    def test_invalid_credentials(self):
+        self.user_manager.register_user("abc", "abc@example.com", "password123")
+        with self.assertRaises(ValueError):
+            self.user_manager.authenticate_user("abc@example.com", "wrongpassword")
+
+
